@@ -1,7 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import userRouter from "./routers/User.routes.js"
+import userRouter from "./routers/User.routes.js";
+import complaintRouter from "./routers/Complaints.route.js";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/user", userRouter);
+app.use("/complaint", complaintRouter);
 
 app.use("/", (req, res) => {
     res.send("QuickDesk API running");
