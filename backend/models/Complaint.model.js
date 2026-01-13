@@ -24,7 +24,9 @@ const complaintSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     }
-})
+},
+    { timestamps: true }
+)
 
 const Complaint = mongoose.model("Complaint", complaintSchema)
 

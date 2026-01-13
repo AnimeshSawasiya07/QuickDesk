@@ -1,4 +1,5 @@
 import Complaint from "../models/Complaint.model.js";
+import { getIO } from "../socket.js";
 
 export const createComplaint = async (req, res) => {
     try {
@@ -32,12 +33,12 @@ export const getComplaints = async (req, res) => {
     }
 };
 
-export const updateComplaintStatus = async () => {
+export const updateComplaintStatus = async (req, res) => {
     try {
         const { status } = req.body;
         const { id } = req.params;
 
-        const complaint = Complaint.findById(id);
+        const complaint = await Complaint.findById(id);
 
         if (!complaint) {
             return res.status(404).json({ message: "Complaint not found" });
@@ -46,12 +47,20 @@ export const updateComplaintStatus = async () => {
         complaint.status = status;
         await complaint.save();
 
+        const io = getIO();
+
+        io.to(complaint.createdBy._id.toString()).emit("complaint-status-updated", {
+            complaintId: complaint._id,
+            status,
+        })
+
         res.status(200).json({
             message: "Status updated successfully",
             complaint,
         });
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 }
