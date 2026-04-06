@@ -9,20 +9,20 @@ export const startComplaintEscalationJob = () => {
             const io = getIO();
             
             const timeLimit = new Date(
-                Date.now() - 48 * 60 * 60 * 1000
+                Date.now() - 24 * 60 * 60 * 1000
             );
 
             const complaints = await Complaint.find({
-                status:"pending",
+                status:"Pending",
                 createdAt:{$lte:timeLimit},
             }).populate("createdBy","_id");
-
+            
             for(const complaint of complaints){
                 complaint.status = "In Progress";
                 await complaint.save();
 
                 io.to(complaint.createdBy._id.toString()).emit(
-                    "complaint-status-update",
+                    "complaint-status-updated",
                     {
                         complaintId: complaint._id,
                         status:"In Progress",

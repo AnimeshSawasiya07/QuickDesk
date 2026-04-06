@@ -1,0 +1,60 @@
+.sideBar {
+    width: 260px;
+    height: 100vh;
+}
+
+ul {
+    margin-top: 40px;
+    list-style: none;
+    line-height: 60px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.nav-link {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    border-left: 4px solid transparent;
+    transition: all 0.25s ease-in-out;
+}
+
+.active {
+    border-left-color: aqua;
+}
+
+.logo {
+    height: 60px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .sideBar {
+    position: fixed;
+    top: 0;
+    left: -260px;          /* sidebar hidden */
+    height: 100vh;
+    z-index: 1050;
+    transition: left 0.3s ease;
+  }
+
+  .sideBar.open {
+    left: 0;               /* sidebar visible */
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1040;
+  }
+
+  .sidebar-overlay.show {
+    display: block;
+  }
+}

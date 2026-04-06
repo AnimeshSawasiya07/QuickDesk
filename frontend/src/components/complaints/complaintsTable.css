@@ -1,0 +1,171 @@
+.table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
+  width: 100%;
+}
+
+.table-wrapper {
+    width: 90%;
+    overflow-x: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 6px;
+}
+
+/* smooth scrollbar */
+.table-wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.scroll-hint {
+  position: sticky;
+  top: 0;
+  text-align: right;
+  font-size: 11px;
+  color: #aaa;
+  padding: 4px 6px;
+  z-index: 5;
+}
+
+/* =======================
+   TABLE
+======================= */
+.complaints-table {
+    min-width: 760px;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.complaints-table th,
+.complaints-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #2a2a2a;
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.complaints-table th {
+    /* background: #f8f8f8; */
+    font-weight: 600;
+    color: #ccc;
+}
+
+.cell-title {
+    font-weight: 500;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    min-width: 80px;
+    padding: 0 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    background: #333;
+}
+
+.status-badge.pending {
+    background: #444;
+}
+
+.status-badge.in_progress {
+    background: #666;
+}
+
+.status-badge.resolved {
+    background: #000;
+    color: #fff;
+}
+
+.action-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 4px;
+}
+
+.action-btn:hover {
+    opacity: 0.85;
+}
+
+.empty-text {
+    margin-top: 1rem;
+    color: #777;
+}
+
+.desc-cell {
+    max-width: 280px;
+}
+
+.desc-text {
+    display: inline-block;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+
+.view-more {
+    margin-left: 6px;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}
+
+
+/* =======================
+   MOBILE TWEAKS
+======================= */
+@media (max-width: 768px) {
+
+    .table-wrapper{
+        width: 100%;
+    }
+
+    .complaints-table th,
+    .complaints-table td {
+        padding: 0.5rem;
+        font-size: 12px;
+    }
+
+    .desc-text {
+        max-width: 70px;
+    }
+
+    .status-badge {
+        font-size: 11px;
+        min-width: 70px;
+    }
+
+    .action-btn {
+        padding: 4px 6px;
+        font-size: 11px;
+    }
+
+    .date-cell {
+        font-size: 11px;
+        color: #aaa;
+    }
+}

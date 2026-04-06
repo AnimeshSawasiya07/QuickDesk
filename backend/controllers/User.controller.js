@@ -22,8 +22,17 @@ export const registerUser = async (req, res) => {
             role: role || 'USER'
         })
 
+        const token = await generateToken(user._id, user.role);
+
         res.status(201).json({
             message: "User registered successfully",
+            token:token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+            },
         });
     }
     catch (error) {

@@ -5,8 +5,7 @@ export const registerValidation = [
   // NAME
   body("name")
     .notEmpty().withMessage("Name is required")
-    .isLength({ min: 3 }).withMessage("Name must be at least 3 characters")
-    .matches(/^[A-Za-z\s]+$/).withMessage("Name must contain only letters"),
+    .isLength({ min: 3 }).withMessage("Name must be at least 3 characters"),
 
   // EMAIL
   body("email")

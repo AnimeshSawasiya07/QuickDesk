@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import jwt from "jsonwebtoken";
 
 let io;
 
@@ -12,6 +13,7 @@ export const initSocket = (server) => {
     io.use((socket, next) => {
         try {
             const token = socket.handshake.auth.token;
+
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             socket.user = decoded;
             next();
@@ -22,7 +24,16 @@ export const initSocket = (server) => {
 
     io.on("connection", (socket) => {
         console.log(`[SOCKET] User connected: ${socket.user.id} (${socket.user.role})`);
-        socket.join(socket.user.id); // personal room
+
+        // personal room
+        socket.join(socket.user.id);
+
+        // authority room
+        if (socket.user.role === "AUTHORITY") {
+            socket.join("authority");
+            console.log("[SOCKET] Authority joined authority room");
+        }
+
     });
 };
 

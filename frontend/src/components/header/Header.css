@@ -1,0 +1,22 @@
+.header{
+ height: 60px;
+ border-bottom: 1px solid rgba(0, 0, 0, 0.393);
+}
+.role{
+    height: 32px;
+}
+.v-line {
+  width: 1px;
+  height: 24px;      
+  background-color: rgba(0, 0, 0, 0.301);
+}
+
+@media (max-width: 768px) {
+  .welcome-text {
+    font-size: 0.95rem;      /* thoda chhota */
+    max-width: 180px;        /* zyada lamba na ho */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* ... aa jaaye */
+  }
+}

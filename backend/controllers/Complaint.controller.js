@@ -12,6 +12,10 @@ export const createComplaint = async (req, res) => {
             createdBy: req.user.id,
         })
 
+        const io = getIO();
+
+        io.to("authority").emit("complaint:new", complaint);
+
         res.status(201).json(complaint);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -49,10 +53,7 @@ export const updateComplaintStatus = async (req, res) => {
 
         const io = getIO();
 
-        io.to(complaint.createdBy._id.toString()).emit("complaint-status-updated", {
-            complaintId: complaint._id,
-            status,
-        })
+        io.to(complaint.createdBy._id.toString()).emit("complaint-status-updated",complaint)
 
         res.status(200).json({
             message: "Status updated successfully",
